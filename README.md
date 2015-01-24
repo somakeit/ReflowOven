@@ -1,5 +1,5 @@
 # ReflowOven
-So Make It's reflow oven firmware &amp; hardware source
+So Make It's reflow oven firmware & hardware source
 
 ##Building
 You will need to install these arduino libraries:
@@ -27,10 +27,12 @@ I propose we use G-Codes:
 - M522* - set sn/pb soak time in min.
 - M523* - set sn/pb flow temp.
 - M524* - set sn/pb flow time.
-- M530/1/2/3/4 - set no-pb paramaters as in M520/1/2/3/4
+- M530/1/2/3/4* - set no-pb paramaters as in M520/1/2/3/4
 - Any other profiles, Dave?
-The obvious advanage is we can use printer host software to drive the machine when we need a pretty graph.
+
 *non-standard G-Code.
+
+The obvious advanage is we can use printer host software to drive the machine when we need a pretty graph.
 
 ##LCD interface
 This is #TODO, we have an RGB backlit 16x2 character display, main screen when operating maybe:
@@ -40,3 +42,8 @@ This is #TODO, we have an RGB backlit 16x2 character display, main screen when o
 |SN/PB-FLOW      |
 ------------------
 ```
+
+##Boring licensing issues.
+We can license the code however we like, favouring GPL2, maybe 3.
+
+Binaries would be subject to licensing chains and must be GPL3 compatible (PID library) with a mention of adafruit (MAX chip lubrary).
