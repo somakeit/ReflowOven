@@ -8,7 +8,7 @@
 #define MAX31855_CLK  3
 Adafruit_MAX31855 thermocouple(MAX31855_CLK, MAX31855_CS, MAX31855_DO);
 
-#define  HEATER_PIN  3
+#define  HEATER_PIN  6
 
 //heater PWM definitions
 void heater_pwm_machine();
@@ -61,14 +61,11 @@ void loop() {
     Serial.print("    Internal: ");
     Serial.println(thermocouple.readInternal());
     
+    char lcd_text[33];
+    sprintf(lcd_text, "T%03d/%03dC P%03d%%", (int) input_temp, (int) target_temp, (int) heater_pwm);
+    
     lcd.setCursor(0, 0);
-    lcd.print("T");
-    lcd.print(input_temp, DEC);
-    lcd.print("/");
-    lcd.print(target_temp, DEC);
-    lcd.print(" P");
-    lcd.print(heater_pwm, DEC);
-    lcd.print("%");
+    lcd.print(lcd_text);
   }
   
   heater_pwm_machine();
