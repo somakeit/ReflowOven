@@ -1,9 +1,12 @@
 #include <PID_v1.h>
 #include <SPI.h>
 #include "Adafruit_MAX31855.h"
+#include <LiquidCrystal.h>
 
-#define CS   4
-Adafruit_MAX31855 thermocouple(CS);
+#define MAX31855_DO   5
+#define MAX31855_CS   4
+#define MAX31855_CLK  3
+Adafruit_MAX31855 thermocouple(MAX31855_CLK, MAX31855_CS, MAX31855_DO);
 
 #define  HEATER_PIN  3
 
@@ -24,11 +27,13 @@ unsigned long last_report = 0;
 unsigned long last_poll = 0; //TODO think about 50 day wrap
 #define  POLL_RATE  1000
 
+LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+
 void setup() {
   Serial.begin(9600);
   
-  // wait for MAX chip to stabilize
-  delay(500);
+  lcd.begin(16, 2);
+  lcd.print("Reflow Oven");
   
   pinMode(HEATER_PIN, OUTPUT);
   digitalWrite(HEATER_PIN, LOW);
@@ -55,6 +60,15 @@ void loop() {
     Serial.print(input_temp);
     Serial.print("    Internal: ");
     Serial.println(thermocouple.readInternal());
+    
+    lcd.setCursor(0, 0);
+    lcd.print("T");
+    lcd.print(input_temp, DEC);
+    lcd.print("/");
+    lcd.print(target_temp, DEC);
+    lcd.print(" P");
+    lcd.print(heater_pwm, DEC);
+    lcd.print("%");
   }
   
   heater_pwm_machine();
