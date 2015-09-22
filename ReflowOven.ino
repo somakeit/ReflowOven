@@ -27,7 +27,8 @@ unsigned long last_report = 0;
 unsigned long last_poll = 0; //TODO think about 50 day wrap
 #define  POLL_RATE  1000
 
-LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+//LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+LiquidCrystal lcd(7, 8, A2, A3, A4, A5);
 
 void setup() {
   Serial.begin(9600);
